@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yay! 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+
+        body { 
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, 
+            #f07dab 0%, 
+            #e4687d 20%, 
+            #5de7f6 55%, 
+            #f4b5cc 100% ); 
+
+            min-height: 100vh; display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            padding: 20px; 
+            overflow: hidden; 
+            position: relative; }
+
+
+      .celebration { 
+        background: rgba(255, 255, 255, 0.4);
+        border-radius: 25px;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        padding: 60px 40px; 
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        text-align: center; 
+        max-width: 600px; 
+        width: 100%; 
+        position: relative; 
+        z-index: 10; 
+        animation: popIn 0.5s ease-out; }
+
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .yay-text {
+            color: #e22541bc;
+            font-size: 80px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            animation: bounce 1s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .party-icon {
+            font-size: 60px;
+            margin: 0 10px;
+            display: inline-block;
+            animation: rotate 2s ease-in-out infinite;
+        }
+
+        @keyframes rotate {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(15deg); }
+        }
+
+        .hearts {
+            font-size: 50px;
+            margin: 10px;
+            display: inline-block;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+         .subtitle {
+            color: #3b1299;
+            font-size: 20px;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+
+        .message {
+            color: #1c1115;
+            font-size: 17px;
+            margin-top: 30px;
+            font-weight: 100;
+        }
+    
+
+        /* Floating hearts background */
+        .floating-heart {
+            position: absolute;
+            font-size: 30px;
+            opacity: 0.6;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .yay-text {
+                font-size: 60px;
+            }
+            .party-icon {
+                font-size: 40px;
+            }
+            .hearts {
+                font-size: 35px;
+            }
+            .message {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating hearts in background -->
+    <div class="floating-heart" style="left: 10%; animation-delay: 0s;">💕</div>
+    <div class="floating-heart" style="left: 20%; animation-delay: 1s;">❤️</div>
+    <div class="floating-heart" style="left: 30%; animation-delay: 2s;">💖</div>
+    <div class="floating-heart" style="left: 40%; animation-delay: 0.5s;">💗</div>
+    <div class="floating-heart" style="left: 50%; animation-delay: 1.5s;">💕</div>
+    <div class="floating-heart" style="left: 60%; animation-delay: 2.5s;">❤️</div>
+    <div class="floating-heart" style="left: 70%; animation-delay: 0.8s;">💖</div>
+    <div class="floating-heart" style="left: 80%; animation-delay: 1.8s;">💗</div>
+    <div class="floating-heart" style="left: 90%; animation-delay: 2.2s;">💕</div>
+
+    <div class="celebration">
+         <div>
+            <span class="party-icon">💕</span>
+           
+        </div>
+        <h1 class="yay-text">Yay!</h1>
+        <p class="subtitle">You’re everything I always wished for,</p>
+        <p class="subtitle"> better than I dreamed of, all I’ll ever need.</p>
+         <p class="message">I can't wait to spend Valentine's Day together!</p>
+         <div>
+            <span class="party-icon">🎉</span>
+            <span class="hearts">❤️</span>
+            <span class="hearts">💕</span>
+            <span class="party-icon">🎉</span>
+        </div>
+    </div>
+
+    <!-- Background Music -->
+    <audio id="bgMusic" loop>
+        <source src="assets/Zaeden - pia (Lyric Visualiser) _ Zaeden 02-[AudioTrimmer.com].mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Check for music sync data from localStorage
+        window.addEventListener('load', () => {
+            const music = document.getElementById('bgMusic');
+            const storedTime = localStorage.getItem('valentineMusicTime');
+            const storedPlaying = localStorage.getItem('valentineMusicPlaying');
+            const timestamp = localStorage.getItem('valentineMusicTimestamp');
+            
+            if (storedTime && timestamp) {
+                // Calculate elapsed time since the button was clicked
+                const elapsed = (Date.now() - parseInt(timestamp)) / 1000;
+                const syncedTime = parseFloat(storedTime) + elapsed;
+                
+                music.volume = 0.35;
+                music.currentTime = syncedTime;
+                
+                if (storedPlaying === 'true') {
+                    music.play().catch(() => {
+                        console.log('Autoplay prevented, music will start on user interaction');
+                    });
+                }
+                
+                // Clear localStorage after use
+                localStorage.removeItem('valentineMusicTime');
+                localStorage.removeItem('valentineMusicPlaying');
+                localStorage.removeItem('valentineMusicTimestamp');
+            } else {
+                // Fallback: Start from beginning if no sync data
+                music.volume = 0.35;
+                music.play().catch(() => {
+                    console.log('Autoplay prevented');
+                });
+            }
+        });
+
+        // Add confetti effect
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.textContent = ['🎊', '🎉', '✨', '💖', '💕'][Math.floor(Math.random() * 5)];
+            confetti.style.position = 'absolute';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.top = '-50px';
+            confetti.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            confetti.style.opacity = '0.8';
+            confetti.style.animation = `float ${Math.random() * 3 + 4}s linear`;
+            document.body.appendChild(confetti);
+
+            setTimeout(() => {
+                confetti.remove();
+            }, 7000);
+        }
+
+        // Create confetti periodically
+        setInterval(createConfetti, 300);
+    </script>
+</body>
+</html>
